@@ -1,29 +1,15 @@
 (function(){
   'use strict';
-  // var url = location.href;  document.write(url);
-  // document.write(navigator.userAgent);  sounds interesting..
-  // onload, onbeforeunloadも面白そう
-
-  // https://utano.jp/demo/2013/09/canvas_draw_line
-  // これみてwidthとheightをこっちで記述する、最終的にはPCとモバイルで分ける
 
 /* 変数定義 */
   var box_color = "black";
   var canvas = document.getElementById("canvas"),
       ctx = canvas.getContext('2d');
   var dnld = document.getElementById("dnld");
-  var wb = document.getElementById("wb"),
-      bb = document.getElementById("bb");
   var clr = document.getElementById("clear");
-  var csWidth, csHeight;
 
-  if(window.matchMedia('(min-width: 700px)').matches) {
-    csWidth = 640,
-    csHeight = 480;
-  } else {
-    csWidth = 320,
-    csHeight = 320;
-  }
+  var csWidth = 10*113;
+  var csHeight = 220;
 
   canvas.width = csWidth;
   canvas.height = csHeight;
@@ -37,20 +23,45 @@
 // plot
   function drawRect(x, y, width, height) {
     ctx.fillStyle = box_color;
-    ctx.fillRect(x, y, width, height);
+    ctx.fillRect(x - x % 10, y, width, height);
   }
   function onClick(e) {
     var x = e.clientX - canvas.offsetLeft;
-    var y = e.clientY - canvas.offsetTop;
-    console.log("x:", x, "y:", y);
-    drawRect(x, y, 20, 20);
+    drawRect(x, 0, 10, 200);
+  }
+  function greyGrid(x, y, width, height) {
+    ctx.fillStyle = "grey";
+    ctx.fillRect(x, y, width, height);
+  }
+  function blueGrid(x, y, width, height) {
+    ctx.fillStyle = "blue";
+    ctx.fillRect(x, y, width, height);
+  }
+  function redGrid(x, y, width, height) {
+    ctx.fillStyle = "red";
+    ctx.fillRect(x, y, width, height);
   }
 
 // clear
-  function clear_canvas() {
-    //ctx.clearRect(0, 0, csWidth, csHeight);
+  function init_canvas() {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, csWidth, csHeight);
+    for(var i=10*11; i<1130-10*7; i= i + 10) {
+      greyGrid(i, 0, 1, 200);
+    }
+    box_color = "black";
+    drawRect(10*11, 0, 10, 220);
+    drawRect(10*13, 0, 10, 220);
+    drawRect(10*57, 0, 10, 220);
+    drawRect(10*59, 0, 10, 220);
+    drawRect(10*103, 0, 10, 220);
+    drawRect(10*105, 0, 10, 220);
+    for(var i=10*21; i<=10*56; i+=70) {
+      blueGrid(i, 0, 1, 200)
+    }
+    for(var i=10*68-70; i<10*103; i+=70) {
+      blueGrid(i, 0, 1, 200)
+    }
   }
 
 // download
@@ -69,69 +80,14 @@
   }
 
 /* 実行 */
-
-  canvas.onload = clear_canvas();
-
-  document.getElementById("yellow").addEventListener('click', function() { change_color("yellow"); }, false);
-  document.getElementById("orange").addEventListener('click', function() { change_color("orange"); }, false);
-  document.getElementById("lightgreen").addEventListener('click', function() { change_color("lightgreen"); }, false);
-  document.getElementById("green").addEventListener('click', function() { change_color("green"); }, false);
-  document.getElementById("skyblue").addEventListener('click', function() { change_color("skyblue"); }, false);
-  document.getElementById("blue").addEventListener('click', function() { change_color("blue"); }, false);
-  document.getElementById("purple").addEventListener('click', function() { change_color("purple"); }, false);
-  document.getElementById("red").addEventListener('click', function() { change_color("red"); }, false);
-  document.getElementById("brown").addEventListener('click', function() { change_color("brown"); }, false);
+  canvas.onload = init_canvas();
   document.getElementById("black").addEventListener('click', function() { change_color("black"); }, false);
-  document.getElementById("grey").addEventListener('click', function() { change_color("grey"); }, false);
   document.getElementById("white").addEventListener('click', function() { change_color("white"); }, false);
-
   canvas.addEventListener('click', onClick, false);
-
-  clr.addEventListener('click', clear_canvas, false);
+  clr.addEventListener('click', init_canvas, false);
   dnld.addEventListener('click', dwnld, false);
 })();
 
 /*
   referring...  https://qiita.com/kyrieleison/items/a3ebf7c55295c3e7d8f0
-  trying to simplify referring... https://teratail.com/questions/54493
-  var ary = [];
-    $('.button').each( function() {
-      var src = $(this).attr('id');
-      ary.push(src);
-    });
-    console.log(ary);
-as of 2018/8/31
-*/
-/*
-2018/9/18
-https://qiita.com/nekoneko-wanwan/items/2827feaf5a831a0726aa
-線を書くの、これみてやろうとしたけど動かないしやりたいことと違った
-onDownをうまく活用して書けるんじゃないかと思ってるところ
-  ctx.strokeStyle = '#666';
-  ctx.lineWidth = 10;
-  var csWidth = ctx.width,
-      csHeight = ctx.height,
-      center = {
-        x: csWidth / 2,
-        y: csHeight / 2
-      };
-
-  function drawHorizontalLine() {
-    ctx.beginPath();
-    ctx.moveTo(0, center.y);
-    ctx.lineTo(csWidth, center.y);
-    // ctx.closePath();
-    ctx.stroke();
-  }
-
-  function drawVerticalLine() {
-    ctx.beginPath();
-    ctx.moveTo(center.x, 0);
-    ctx.lineTo(center.x, csHeight);
-    // ctx.closePath();
-    ctx.stroke();
-  }
-
-  drawHorizontalLine();
-  drawVerticalLine();
 */

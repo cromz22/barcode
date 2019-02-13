@@ -2,13 +2,27 @@ body {
   background: #eee;
 }
 
+.colorbtn {
+  width: 38px;
+  height: 38px;
+  margin: 4px;
+}
+
+#black {
+  background: black;
+}
+
+#white {
+  background: white;
+}
+
 #canvas {
   /* background: #fff; */
   border: 1px solid #000;
 }
 
 #container {
-  width: 640px;
+  width: 1200px;
   margin: 0 auto;
   text-align: center;
 }
@@ -17,58 +31,4 @@ body {
   margin: 4px;
   text-decoration: none;
   color: black;
-}
-
-.colorbtn {
-  width: 38px;
-  height: 38px;
-  margin: 4px;
-}
-
-#yellow {
-  background: yellow;
-}
-
-#orange {
-  background: orange;
-}
-
-#lightgreen {
-  background: lightgreen;
-}
-
-#green {
-  background: green;
-}
-
-#skyblue {
-  background: skyblue;
-}
-
-#blue {
-  background: blue;
-}
-
-#purple {
-  background: purple;
-}
-
-#red {
-  background: red;
-}
-
-#brown {
-  background: brown;
-}
-
-#black {
-  background: black;
-}
-
-#grey {
-  background: grey;
-}
-
-#white {
-  background: white;
 }
