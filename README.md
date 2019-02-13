@@ -1,3 +1,3 @@
-# pixel art
-ドットで絵が描けるページです。描いた絵のダウンロードもできます。  
+# barcode
+pixel-artの派生でつくったバーコードを作成するアプリです。形式はJAN-13です。
 <https://cromz22.github.io/oekaki/>
