@@ -1,3 +1,3 @@
 # barcode
-pixel-artの派生でつくったバーコードを作成するアプリです。形式はJAN-13です。
+pixel-artの派生でつくったJAN-13のバーコードを作成するアプリです。
 <https://cromz22.github.io/oekaki/>
